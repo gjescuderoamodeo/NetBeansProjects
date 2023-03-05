@@ -1,0 +1,6 @@
+modelo\Grupo.class
+modelo\Alumno_Asignatura.class
+com\mycompany\alumnogrupo\AlumnoGrupo.class
+conexionDB\PruebaConexiónBD.class
+modelo\Alumno.class
+conexionDB\ConexionBD.class

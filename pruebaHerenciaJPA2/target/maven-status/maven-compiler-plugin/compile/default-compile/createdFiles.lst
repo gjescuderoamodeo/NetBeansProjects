@@ -1,0 +1,16 @@
+controllers\PersonaJpaController.class
+entidades\Programador.class
+controllers\ProgramadorJpaController.class
+com\mycompany\pruebaherenciajpa2\PruebaHerenciaJPA2.class
+controllers\exceptions\IllegalOrphanException.class
+entidades\Persona_.class
+entidades\Programador_.class
+daos\exceptions\IllegalOrphanException.class
+entidades\Tester_.class
+controllers\exceptions\NonexistentEntityException.class
+controllers\exceptions\PreexistingEntityException.class
+controllers\TesterJpaController.class
+entidades\Persona.class
+daos\exceptions\PreexistingEntityException.class
+entidades\Tester.class
+daos\exceptions\NonexistentEntityException.class

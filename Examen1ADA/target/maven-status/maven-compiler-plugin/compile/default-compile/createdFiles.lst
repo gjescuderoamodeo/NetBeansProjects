@@ -1,0 +1,14 @@
+com\mycompany\examen1ada\ExamenHandlerXML.class
+entidades\Alimento.class
+conexionDB\ConexionBD.class
+entidades\Ingrediente.class
+DAO\InterfaceDaoAlimento.class
+entidades\IngredientePK_.class
+entidades\Receta.class
+entidades\Alimento_.class
+entidades\IngredientePK.class
+DAO\DaoAlimento.class
+com\mycompany\examen1ada\Examen1ADA.class
+entidades\Receta_.class
+DAO\DAO.class
+entidades\Ingrediente_.class
