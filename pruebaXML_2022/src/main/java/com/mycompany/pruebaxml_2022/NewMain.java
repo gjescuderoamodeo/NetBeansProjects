@@ -23,7 +23,7 @@ public class NewMain {
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
         
-        String ruta="D:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\profesores.xml";
+        String ruta="I:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\profesores.xml";
         ProfesorHandlerXML handler=new ProfesorHandlerXML();
         
         leerXML(handler,ruta);
