@@ -8,7 +8,22 @@ package modelo;
  *
  * @author DON GUILLERMO
  */
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "alimento")
 public class Alimento {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     private String nombre;
     private double proteinas;
     private double grasas;
@@ -17,8 +32,6 @@ public class Alimento {
     public Alimento() {
     }
     
-    
-
     public Alimento(String nombre, double proteinas, double grasas, double hidratos) {
         this.nombre = nombre;
         this.proteinas = proteinas;
@@ -28,6 +41,16 @@ public class Alimento {
 
     // getters y setters
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+
+    
     public String getNombre() {
         return nombre;
     }
@@ -62,9 +85,9 @@ public class Alimento {
 
     @Override
     public String toString() {
-        return "Alimento{" + "nombre=" + nombre + ", proteinas=" + proteinas + ", grasas=" + grasas + ", hidratos=" + hidratos + '}';
+        return "Alimento{" + "id=" + id + ", nombre=" + nombre + ", proteinas=" + proteinas + ", grasas=" + grasas + ", hidratos=" + hidratos + '}';
     }
     
-    
 }
+
 

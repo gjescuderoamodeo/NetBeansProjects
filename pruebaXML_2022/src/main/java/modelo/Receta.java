@@ -10,23 +10,54 @@ package modelo;
  */
 import java.util.ArrayList;
 
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "receta")
 public class Receta {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    
     private String nombre;
-    private ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ingrediente> ingredientes = new ArrayList<Ingrediente>();
 
     public Receta() {
     }
-    
-    
 
-    public Receta(String nombre, ArrayList<Ingrediente> ingredientes) {
+    public Receta(String nombre, List<Ingrediente> ingredientes) {
         this.nombre = nombre;
         this.ingredientes = ingredientes;
     }
-    
-    public void addIngrediente(Ingrediente ingrediente){
+
+    public void addIngrediente(Ingrediente ingrediente) {
         ingredientes.add(ingrediente);
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+   
 
     public String getNombre() {
         return nombre;
@@ -36,7 +67,7 @@ public class Receta {
         this.nombre = nombre;
     }
 
-    public ArrayList<Ingrediente> getIngredientes() {
+    public List<Ingrediente> getIngredientes() {
         return ingredientes;
     }
 
@@ -46,7 +77,8 @@ public class Receta {
 
     @Override
     public String toString() {
-        return "Receta [nombre=" + nombre + "\n , ingredientes=" + ingredientes.toString() + "]";
+        return "Receta [id=" + id + ", nombre=" + nombre + "\n, ingredientes=" + ingredientes.toString() + "]";
     }
 }
+
 
