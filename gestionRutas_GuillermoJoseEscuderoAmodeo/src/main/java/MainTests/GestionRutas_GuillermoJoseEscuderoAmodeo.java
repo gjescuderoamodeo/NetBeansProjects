@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.gestionrutas_guillermojoseescuderoamodeo;
+package MainTests;
 
-import controladores.LugarJpaController;
-import controladores.RutaJpaController;
+import controladores_JPA.LugarJpaController;
+import controladores_JPA.RutaJpaController;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Lugar;
@@ -25,8 +26,15 @@ public class GestionRutas_GuillermoJoseEscuderoAmodeo {
         LugarJpaController daoLugar = new LugarJpaController(emf);
         RutaJpaController daoRuta = new RutaJpaController(emf);
         
+        //listado rutas determinado lugar
+        String nombre = "Sevilla";
+        
+        System.out.println("Rutas de un determinado lugar");
+        System.out.println(daoRuta.findRutasOfLugar(nombre));
+        
+        
         //
-        Lugar lugar=new Lugar();
+        /*Lugar lugar=new Lugar();
         lugar.setNombre("test");
         lugar.setDescripcion("precioso");
         Ruta ruta = new Ruta();
@@ -36,7 +44,7 @@ public class GestionRutas_GuillermoJoseEscuderoAmodeo {
         daoLugar.create(lugar);
         lugar.addRuta(ruta);
         daoRuta.create(ruta);
-        daoLugar.edit(lugar);
+        daoLugar.edit(lugar);*/
         
         //System.out.println("conexión realizada");
     }

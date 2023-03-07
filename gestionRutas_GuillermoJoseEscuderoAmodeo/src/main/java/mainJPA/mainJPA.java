@@ -6,6 +6,8 @@ package mainJPA;
 
 
 import OperacionesXML.RutasHandlerXML;
+import controladores_JPA.LugarJpaController;
+import controladores_JPA.RutaJpaController;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -26,15 +28,28 @@ import org.xml.sax.helpers.DefaultHandler;
 public class mainJPA {
       public static void main(String[] args) throws Exception { 
           
-        String ruta = "E:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\rutas.xml";
+        //String ruta = "E:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\rutas.xml";
+        String ruta = "src/main/java/XML/rutas.xml";
         RutasHandlerXML handler = new RutasHandlerXML();
 
         leerXML(handler, ruta);
         ArrayList<Lugar> rutas = handler.getRutas();
 
-        for (Lugar p : rutas) {
-            System.out.println("rutas: " + p.toString());
-        }        
+        //for (Lugar p : rutas) {
+        //    System.out.println("rutas: " + p.toString());
+        //}
+
+        //listado rutas determinado lugar
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bdRutas");
+      
+
+        LugarJpaController daoLugar = new LugarJpaController(emf);
+        RutaJpaController daoRuta = new RutaJpaController(emf);
+        
+        String nombre = "Sevilla";
+        
+        System.out.println("Rutas de un determinado lugar");
+        System.out.println(daoRuta.findRutasOfLugar(nombre));        
 
     }  
       

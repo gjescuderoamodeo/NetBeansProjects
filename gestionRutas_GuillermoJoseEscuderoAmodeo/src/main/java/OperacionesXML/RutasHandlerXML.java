@@ -9,8 +9,8 @@ package OperacionesXML;
  * @author DON GUILLERMO
  */
 
-import controladores.LugarJpaController;
-import controladores.RutaJpaController;
+import controladores_JPA.LugarJpaController;
+import controladores_JPA.RutaJpaController;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package controladores;
+package controladores_JPA;
 
 /**
  *
@@ -98,6 +98,21 @@ public class RutaJpaController implements Serializable {
 
     public List<Ruta> findRutaEntities() {
         return findRutaEntities(true, -1, -1);
+    }
+    
+    public List<Ruta> findRutasOfLugar(String nombre){        
+        List<Ruta> rutas = findRutaEntities();
+         List<Ruta> rutas2 = new ArrayList<Ruta>();
+        for(int i=0;i<rutas.size();i++){
+            String rutaN = rutas.get(i).getNombre().toLowerCase();
+            int index = rutaN.indexOf("-");
+            String nombreRuta2 = rutaN.substring(0, index);
+            if(nombreRuta2.equals(nombre.toLowerCase())){
+                rutas2.add(rutas.get(i));
+            }
+        }
+        
+        return rutas2;
     }
 
     public List<Ruta> findRutaEntities(int maxResults, int firstResult) {
