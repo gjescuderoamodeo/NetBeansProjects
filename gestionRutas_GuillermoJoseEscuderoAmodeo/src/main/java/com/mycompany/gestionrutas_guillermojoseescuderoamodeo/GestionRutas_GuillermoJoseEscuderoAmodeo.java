@@ -5,13 +5,29 @@
 
 package com.mycompany.gestionrutas_guillermojoseescuderoamodeo;
 
+import controladores.LugarJpaController;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import modelo.Lugar;
+
 /**
  *
  * @author GuillermoJ
  */
 public class GestionRutas_GuillermoJoseEscuderoAmodeo {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("examen");
+      
+        
+              
+        LugarJpaController daoLugar = new LugarJpaController(emf);
+        
+        //
+        Lugar lugar=new Lugar();
+        lugar.setNombre("test");
+        daoLugar.create(lugar);
+        
+        //System.out.println("conexión realizada");
     }
 }
