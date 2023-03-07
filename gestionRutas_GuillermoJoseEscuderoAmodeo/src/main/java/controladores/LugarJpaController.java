@@ -40,7 +40,7 @@ public class LugarJpaController implements Serializable {
             em.persist(lugar);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findLugar(lugar.getIdLugar()) != null) {
+            if (findLugar(lugar.getNombre()) != null) {
                 throw new PreexistingEntityException("El Lugar " + lugar + " ya existe.", ex);
             }
             throw ex;
@@ -61,9 +61,10 @@ public class LugarJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = lugar.getIdLugar();
-                if (findLugar(id) == null) {
-                    throw new NonexistentEntityException("El lugar con id " + id + " no existe.");
+                //Integer id = lugar.getIdLugar();
+                String nombre = lugar.getNombre();
+                if (findLugar(nombre) == null) {
+                    throw new NonexistentEntityException("El lugar con id " + nombre + " no existe.");
                 }
             }
             throw ex;
@@ -74,17 +75,18 @@ public class LugarJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(String nombre) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Lugar lugar;
             try {
-                lugar = em.getReference(Lugar.class, id);
-                lugar.getIdLugar();
+                lugar = em.getReference(Lugar.class, nombre);
+                //lugar.getIdLugar();
+                lugar.getNombre();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("El lugar con id " + id + " no existe.", enfe);
+                throw new NonexistentEntityException("El lugar con id " + nombre + " no existe.", enfe);
             }
             em.remove(lugar);
             em.getTransaction().commit();
@@ -119,10 +121,10 @@ public class LugarJpaController implements Serializable {
         }
     }
 
-    public Lugar findLugar(Integer id) {
+    public Lugar findLugar(String nombre) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Lugar.class, id);
+            return em.find(Lugar.class, nombre);
         } finally {
             em.close();
         }

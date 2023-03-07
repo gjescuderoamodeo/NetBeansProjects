@@ -27,29 +27,40 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "lugar")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Lugar.findAll", query = "SELECT l FROM Lugar l"),
-    @NamedQuery(name = "Lugar.findByIdLugar", query = "SELECT l FROM Lugar l WHERE l.idLugar = :idLugar"),
-    @NamedQuery(name = "Lugar.findByNombre", query = "SELECT l FROM Lugar l WHERE l.nombre = :nombre")})
 public class Lugar implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id_lugar")
-    private Integer idLugar;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@Basic(optional = false)
+    //@Column(name = "id_lugar")
+    //private Integer idLugar;
     
+    @Id
+    @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ruta")
+    @Column(name = "descripcion")    
+    private String descripcion;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino")
     private List<Ruta> rutaList;
 
     public Lugar() {
     }
 
-    public Lugar(Integer idLugar) {
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    
+    
+    /*public Lugar(Integer idLugar) {
         this.idLugar = idLugar;
     }
 
@@ -59,7 +70,7 @@ public class Lugar implements Serializable {
 
     public void setIdLugar(Integer idLugar) {
         this.idLugar = idLugar;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -78,25 +89,6 @@ public class Lugar implements Serializable {
         this.rutaList = rutaList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idLugar != null ? idLugar.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Lugar)) {
-            return false;
-        }
-        Lugar other = (Lugar) object;
-        if ((this.idLugar == null && other.idLugar != null) || (this.idLugar != null && !this.idLugar.equals(other.idLugar))) {
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public String toString() {

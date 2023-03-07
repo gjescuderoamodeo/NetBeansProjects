@@ -17,15 +17,15 @@ import modelo.Lugar;
 public class GestionRutas_GuillermoJoseEscuderoAmodeo {
 
     public static void main(String[] args) throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("examen");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bdRutas");
       
-        
-              
+
         LugarJpaController daoLugar = new LugarJpaController(emf);
         
         //
         Lugar lugar=new Lugar();
         lugar.setNombre("test");
+        lugar.setDescripcion("precioso");
         daoLugar.create(lugar);
         
         //System.out.println("conexión realizada");

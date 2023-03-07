@@ -30,22 +30,22 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "ruta")
 @XmlRootElement
-@NamedQueries({
-    @NamedQuery(name = "Ruta.findAll", query = "SELECT r FROM Ruta r"),
-    @NamedQuery(name = "Ruta.findByIdRuta", query = "SELECT r FROM Ruta r WHERE r.idRuta = :idRuta")})
 public class Ruta implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_ruta")
-    private Integer idRuta;
+    private Integer idRuta;*/
     
+    @Id
+    @Basic(optional = false)
     @Column(name = "nombre")
     private String nombre;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "destino")
+    @JoinColumn(name = "destino", referencedColumnName = "nombre")
+    @ManyToOne(optional = false)
     private Lugar destino;
     
     @Column(name = "distancia")
@@ -54,7 +54,7 @@ public class Ruta implements Serializable {
     public Ruta() {
     }
 
-    public Ruta(Integer idRuta) {
+    /*public Ruta(Integer idRuta) {
         this.idRuta = idRuta;
     }
 
@@ -64,7 +64,7 @@ public class Ruta implements Serializable {
 
     public void setIdRuta(Integer idRuta) {
         this.idRuta = idRuta;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -92,32 +92,14 @@ public class Ruta implements Serializable {
         this.distancia = distancia;
     }
 
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idRuta != null ? idRuta.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Ruta)) {
-            return false;
-        }
-        Ruta other = (Ruta) object;
-        if ((this.idRuta == null && other.idRuta != null) || (this.idRuta != null && !this.idRuta.equals(other.idRuta))) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
-        return "entidades.Ruta[ idRuta=" + idRuta + " ]";
+        return "Ruta{" + "nombre=" + nombre + ", destino=" + destino + ", distancia=" + distancia + '}';
     }
+
+    
+
+
 
     
 }

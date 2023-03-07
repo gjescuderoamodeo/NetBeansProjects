@@ -41,7 +41,7 @@ public class RutaJpaController implements Serializable {
             em.persist(ruta);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findRuta(ruta.getIdRuta()) != null) {
+            if (findRuta(ruta.getNombre()) != null) {
                 throw new PreexistingEntityException("El ruta " + ruta + " ya existe.", ex);
             }
             throw ex;
@@ -62,9 +62,9 @@ public class RutaJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = ruta.getIdRuta();
-                if (findRuta(id) == null) {
-                    throw new NonexistentEntityException("El ruta con id " + id + " no existe.");
+                String nombre = ruta.getNombre();
+                if (findRuta(nombre) == null) {
+                    throw new NonexistentEntityException("El ruta con id " + nombre + " no existe.");
                 }
             }
             throw ex;
@@ -83,7 +83,7 @@ public class RutaJpaController implements Serializable {
             Ruta ruta;
             try {
                 ruta = em.getReference(Ruta.class, id);
-                ruta.getIdRuta();
+                ruta.getNombre();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("El ruta con id " + id + " no existe.", enfe);
             }
@@ -120,10 +120,10 @@ public class RutaJpaController implements Serializable {
         }
     }
 
-    public Ruta findRuta(Integer id) {
+    public Ruta findRuta(String nombre) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Ruta.class, id);
+            return em.find(Ruta.class, nombre);
         } finally {
             em.close();
         }
