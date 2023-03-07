@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -48,6 +49,7 @@ public class Lugar implements Serializable {
     private List<Ruta> rutaList;
 
     public Lugar() {
+      rutaList = new ArrayList<Ruta>();   
     }
 
     public String getDescripcion() {

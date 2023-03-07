@@ -6,9 +6,11 @@
 package com.mycompany.gestionrutas_guillermojoseescuderoamodeo;
 
 import controladores.LugarJpaController;
+import controladores.RutaJpaController;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import modelo.Lugar;
+import modelo.Ruta;
 
 /**
  *
@@ -21,12 +23,20 @@ public class GestionRutas_GuillermoJoseEscuderoAmodeo {
       
 
         LugarJpaController daoLugar = new LugarJpaController(emf);
+        RutaJpaController daoRuta = new RutaJpaController(emf);
         
         //
         Lugar lugar=new Lugar();
         lugar.setNombre("test");
         lugar.setDescripcion("precioso");
+        Ruta ruta = new Ruta();
+        ruta.setNombre("test-test");
+        ruta.setDistancia("2000");
+        ruta.setDestino(lugar);
         daoLugar.create(lugar);
+        lugar.addRuta(ruta);
+        daoRuta.create(ruta);
+        daoLugar.edit(lugar);
         
         //System.out.println("conexión realizada");
     }

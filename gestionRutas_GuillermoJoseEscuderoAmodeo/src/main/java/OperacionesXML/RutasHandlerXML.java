@@ -57,6 +57,15 @@ public class RutasHandlerXML extends DefaultHandler {
         if (nombreCualif.equals("lugar")){
             lugar=new Lugar();
             lugar.setNombre(atrbts.getValue("nombre"));
+            if(atrbts.getValue("descripcion")!=null){
+                lugar.setDescripcion(atrbts.getValue("descripcion"));
+            }
+            //para que no la lie con Sevilla, lo creo antes y me quito problemas
+            try {
+                daoLugar.create(lugar);
+            } catch (Exception ex) {
+                Logger.getLogger(RutasHandlerXML.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         //si empieza con 
         if (nombreCualif.equals("ruta")){

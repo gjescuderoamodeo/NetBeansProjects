@@ -5,6 +5,7 @@
 package mainJPA;
 
 
+import OperacionesXML.RutasHandlerXML;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import modelo.Lugar;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.DefaultHandler;
@@ -24,34 +26,16 @@ import org.xml.sax.helpers.DefaultHandler;
 public class mainJPA {
       public static void main(String[] args) throws Exception { 
           
-        String ruta = "I:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\rutas.xml";
-        RecetasHandlerXML2 handler = new RecetasHandlerXML2();
+        String ruta = "E:\\DAM\\Ejercicios\\ADA\\NetBeansProjects\\XMLs\\rutas.xml";
+        RutasHandlerXML handler = new RutasHandlerXML();
 
         leerXML(handler, ruta);
-        ArrayList<Receta> recetas = handler.getRecetas();
+        ArrayList<Lugar> rutas = handler.getRutas();
 
-        for (Receta p : recetas) {
-            System.out.println("receta: " + p.toString());
-        }
-        
-        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("examen");
-      
-        
-              
-        //AlimentoJpaController daoAlimento = new AlimentoJpaController(emf);
-        
-        //crear persona
-        /*Alimento alimento=new Alimento();
-        alimento.setNombre("test");
-        alimento.setProteinas(333);
-        daoAlimento.create(alimento);*/
-        
-        //Ingrediente ingrediente=new Ingrediente();
-        //ingrediente.setAlimento("test");
-        //ingrediente.setCantidad(0);
-        //daoAlimento.create(ingrediente);
-        
-        //System.out.println("conexión realizada");
+        for (Lugar p : rutas) {
+            System.out.println("rutas: " + p.toString());
+        }        
+
     }  
       
       private static void leerXML(DefaultHandler handler, String nombre) throws Exception {
