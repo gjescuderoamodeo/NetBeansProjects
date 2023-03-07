@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rutas>
+	<lugar nombre="Sevilla">
+		<ruta nombre="sevilla-cordoba" destino="Córdoba" distancia="140"/>
+		<ruta nombre="sevilla-huelva" destino="Huelva" distancia="80"/>
+	</lugar>
+	<lugar nombre="Cádiz">
+		<ruta nombre="cadiz-huelva" destino="Huelva" distancia="200"/>
+	</lugar>
+	<lugar nombre="Granada" descripcion="Muy bonita"/>
+</rutas>
