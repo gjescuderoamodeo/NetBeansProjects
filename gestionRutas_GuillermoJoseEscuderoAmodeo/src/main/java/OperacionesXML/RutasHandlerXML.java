@@ -27,7 +27,7 @@ public class RutasHandlerXML extends DefaultHandler {
     //creacion objetos
     private StringBuilder cadena;
     private Ruta ruta;
-    private ArrayList<Ruta> rutas=new ArrayList<Ruta>();
+    private ArrayList<Lugar> rutas=new ArrayList<Lugar>();
     private Lugar lugar;
     
     //creacion jpa controllers
@@ -37,7 +37,7 @@ public class RutasHandlerXML extends DefaultHandler {
   
     // Parte que recoge los objetos creados para ser enviados fuera de la clase
     
-    public ArrayList<Ruta> getRutas() {
+    public ArrayList<Lugar> getRutas() {
         return rutas;
     }
      
@@ -66,27 +66,20 @@ public class RutasHandlerXML extends DefaultHandler {
             
             //consulto base de datos si existe este lugar
             if(daoLugar.findLugar(atrbts.getValue("destino"))!=null){
-                
+                ruta.setDestino(daoLugar.findLugar(atrbts.getValue("destino")));
+            }else{
+                //lo creo y luego lo añado si no existe
+                Lugar lugarsito = new Lugar();
+                lugarsito.setNombre(atrbts.getValue("destino"));
+                try {
+                    daoLugar.create(lugarsito);
+                } catch (Exception ex) {
+                    Logger.getLogger(RutasHandlerXML.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                ruta.setDestino(lugarsito);
             }
             
-        }
-        //si empieza con 
-        if (nombreCualif.equals("proteinas")){
-            alimento.setProteinas(Double.parseDouble(atrbts.getValue("cantidad100g")));
-        }
-        //si empieza con 
-        if (nombreCualif.equals("grasas")){
-            alimento.setGrasas(Double.parseDouble(atrbts.getValue("cantidad100g")));
-        }
-        //si empieza con 
-        if (nombreCualif.equals("hidratos")){
-            alimento.setHidratos(Double.parseDouble(atrbts.getValue("cantidad100g")));
-        }
-        //si empieza con 
-        //if (nombreCualif.equals("cantidad")){
-        //    ingrediente.setCantidad(20);
-        //}
-        
+        }       
        
          System.out.println("startElement: "+nombreLocal+ " "+nombreCualif);
      }
@@ -103,39 +96,36 @@ public class RutasHandlerXML extends DefaultHandler {
     @Override
     public void endElement(String uri, String nombreLocal, String nombreCualif) throws SAXException {
 
-        //si termina ingrediente, añado ingrediente a receta
-        if (nombreCualif.equals("ingrediente")){
-            receta.addIngrediente(ingrediente);
+        //si termina ruta, se lo añado al lugar y añado la ruta a la BD
+        if (nombreCualif.equals("ruta")){
+            lugar.addRuta(ruta);
             try {
-                daoIngrediente.create(ingrediente);
+                daoRuta.create(ruta);
             } catch (Exception ex) {
                 Logger.getLogger(RutasHandlerXML.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //si termina alimento, añado alimento a ingrediente 
-        if (nombreCualif.equals("alimento")){
-            ingrediente.setAlimento(alimento);
+        //si termina lugar, añado lugar a rutas (local) y si no existe, lo creo (BD). o lo modifico (BD)
+        if (nombreCualif.equals("lugar")){
+            rutas.add(lugar);
             try {
-                daoAlimento.create(alimento);
+                if(daoLugar.findLugar(lugar.getNombre())==null){
+                    daoLugar.create(lugar);
+                }else{
+                    daoLugar.edit(lugar);
+                }                
+                
             } catch (Exception ex) {
                 Logger.getLogger(RutasHandlerXML.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-        if (nombreCualif.equals("receta")){
-            recetas.add(receta);
-            try {
-                daoReceta.create(receta);
-            } catch (Exception ex) {
-                Logger.getLogger(RutasHandlerXML.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        }      
         
         //!!!!! con esto cogo el numero de en medio !!!!!!!!!!
         // si termina cantidad, establezco la cantidad del ingrediente actual
-        if (nombreCualif.equals("cantidad")) {
-        double cantidad = Double.parseDouble(cadena.toString().trim());
-            ingrediente.setCantidad((int) cantidad);
-        }
+        //if (nombreCualif.equals("cantidad")) {
+        //double cantidad = Double.parseDouble(cadena.toString().trim());
+        //    ingrediente.setCantidad((int) cantidad);
+        //}
         
         
         System.out.println("endtElement: "+nombreLocal+ " "+nombreCualif);
