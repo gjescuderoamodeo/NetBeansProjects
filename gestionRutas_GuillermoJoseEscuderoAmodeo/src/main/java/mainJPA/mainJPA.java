@@ -35,9 +35,9 @@ public class mainJPA {
         leerXML(handler, ruta);
         ArrayList<Lugar> rutas = handler.getRutas();
 
-        //for (Lugar p : rutas) {
-        //    System.out.println("rutas: " + p.toString());
-        //}
+        for (Lugar p : rutas) {
+            System.out.println("rutas: " + p.toString());
+        }
 
         //listado rutas determinado lugar
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("bdRutas");
@@ -46,7 +46,7 @@ public class mainJPA {
         LugarJpaController daoLugar = new LugarJpaController(emf);
         RutaJpaController daoRuta = new RutaJpaController(emf);
         
-        String nombre = "Sevilla";
+        String nombre = "Granada";
         
         System.out.println("Rutas de un determinado lugar");
         System.out.println(daoRuta.findRutasOfLugar(nombre));        

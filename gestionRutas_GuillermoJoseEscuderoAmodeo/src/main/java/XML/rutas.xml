@@ -5,7 +5,8 @@
 		<ruta nombre="sevilla-huelva" destino="Huelva" distancia="80"/>
 	</lugar>
 	<lugar nombre="Cádiz">
-		<ruta nombre="cadiz-huelva" destino="Huelva" distancia="200"/>
+		<ruta nombre="cádiz-Granada" destino="Granada" distancia="200"/>
 	</lugar>
 	<lugar nombre="Granada" descripcion="Muy bonita"/>
+        <lugar nombre="Jaén" descripcion="Muy bonita"/>
 </rutas>
